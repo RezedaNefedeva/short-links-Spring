@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/app_style.css}">
+    <meta charset="UTF-8">
+    <title>Сокращение ссылок</title>
+</head>
+<body>
+<div class="box">
+<h1>Сокращение ссылок</h1>
+<div>
+    <h2>Добавление ссылки</h2>
+    <form method="post">
+        <input type="text" name="long_link" placeholder="Введите ссылку">
+        <input type="text" name="smallLink" placeholder="Введите сокращенную ссылку">
+        <button type="submit">Добавить</button>
+    </form>
+</div>
+    <div class="err">
+        <p th:text="${error}" style="color:red; text-indent: 25px;"/>
+    </div>
+<div class="list" th:if="${!shortLinks.isEmpty()}">
+    <h2>Все ссылки</h2>
+    <div th:each="el:${shortLinks}">
+        <ul>
+            <li>Ссылка: <a th:href="'http://' + ${el.link}" th:text="${el.smallLink}"></a></li>
+        </ul>
+    </div>
+</div>
+    <div class="list" th:if="${shortLinks.isEmpty()}">
+        <p>Нет ссылок</p>
+    </div>
+</div>
+</body>
+</html>
